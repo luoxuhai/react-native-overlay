@@ -21,13 +21,13 @@ class RNToast: NSObject {
       haptic = .error
     case "warning":
       haptic = .warning
-    case "none":
-      haptic = .none
-    default:
+    case "success":
       haptic = .success
+    default:
+      haptic = .none
     }
-    
-    DispatchQueue.main.async {
+
+      DispatchQueue.main.async {
       SPIndicator.present(title: title, message: message, preset: preset, haptic: haptic)
     }
   }

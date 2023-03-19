@@ -1,7 +1,7 @@
 {
   "name": "@react-native-library/overlay",
-  "version": "0.1.0",
-  "description": "test",
+  "version": "0.2.0",
+  "description": "Toasts for React Native iOS",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",

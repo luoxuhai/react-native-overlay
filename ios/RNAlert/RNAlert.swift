@@ -6,6 +6,7 @@ class RNAlert: NSObject {
   func show(options: NSDictionary) -> Void {
     let title = options["title"] as! String
     let message = options["message"] as! String
+    let duration = options["duration"] as? Float ?? 2
     var preset: SPAlertIconPreset
     var haptic: SPAlertHaptic
 
@@ -14,6 +15,8 @@ class RNAlert: NSObject {
       preset = .error
     case "spinner":
       preset = .spinner
+    case "heart":
+      preset = .heart
     default:
       preset = .done
     }
@@ -23,20 +26,21 @@ class RNAlert: NSObject {
       haptic = .error
     case "warning":
       haptic = .warning
-    case "none":
-      haptic = .none
-    default:
+    case "success":
       haptic = .success
+    default:
+      haptic = .none
     }
     
     let view = SPAlertView(
       title: title,
       message: message,
-      preset: preset)
+      preset: preset
+    )
+    view.duration = TimeInterval(duration)
     
     DispatchQueue.main.async {
-      view.present(
-        haptic: haptic)
+      view.present(haptic: haptic)
     }
   }
   

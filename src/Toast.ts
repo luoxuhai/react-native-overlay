@@ -4,6 +4,7 @@ interface Options {
   title?: string;
   message?: string;
   preset?: 'done' | 'error';
+  haptic?: 'success' | 'warning' | 'error' | 'none';
 }
 
 async function show(options: Options): Promise<void> {
@@ -16,4 +17,4 @@ async function show(options: Options): Promise<void> {
 
 export const Toast = {
   show,
-}
+};
