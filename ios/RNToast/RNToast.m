@@ -4,4 +4,8 @@
 
 RCT_EXTERN_METHOD(show:(NSDictionary *)options)
 
++ (BOOL) requiresMainQueueSetup {
+  return NO;
+}
+
 @end
