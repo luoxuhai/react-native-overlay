@@ -14,5 +14,5 @@ async function stop() {
 
 export const Confetti = {
   start,
-  stop
-}
+  stop,
+};
