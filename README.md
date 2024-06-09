@@ -1,4 +1,4 @@
-# @react-native-library/overlay
+# react-native-overlay
 
 ## Installation
 
@@ -14,12 +14,12 @@ npm install @react-native-library/overlay
 import { Toast } from '@react-native-library/overlay';
 
 Toast.show({
-  title: "xxx";
-  message: "xxx";
+  title: "Hello";
+  message: "World";
   /**
    * 'done' | 'error'
    */
-  preset: 'done';
+  icon: 'done';
   /**
    * 'success' | 'warning' | 'error' | 'none';
    */
@@ -33,20 +33,20 @@ Toast.show({
 import { Alert } from '@react-native-library/overlay';
 
 Alert.show({
-  title: "xxx";
-  message: "xxx";
+  title: "Hello";
+  message: "World";
   /**
    * 'done' | 'error' | 'spinner'
    */
-  preset: 'done';
+  icon: 'done';
   /**
    * 'success' | 'warning' | 'error' | 'none';
    */
   haptic: 'success';
   /**
-   * Optional, duration in seconds
+   * Optional, duration in milliseconds
    */
-  duration: 2;
+  duration: 2000;
 })
 
 Alert.dismissAll();
@@ -60,9 +60,9 @@ import { Confetti } from '@react-native-library/overlay';
 
 Confetti.show({
   /**
-   * Optional, duration in seconds
+   * Optional, duration in milliseconds
    */
-  duration: 2;
+  duration: 2000;
 })
 ```
 

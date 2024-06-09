@@ -5,7 +5,10 @@ interface Options {
 }
 
 async function start(options: Options): Promise<void> {
-  return await NativeModules.RNConfetti.start(options);
+  const duration = options.duration ?? 2000;
+  return await NativeModules.RNConfetti.start({
+    duration: duration / 1000,
+  });
 }
 
 async function stop() {

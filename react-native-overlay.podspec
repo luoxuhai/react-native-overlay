@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   s.dependency "React-Core"
   s.dependency 'SPIndicator', '1.6.4'
   s.dependency 'SPConfetti', '1.4.0'
-  s.dependency 'SPAlert', '4.2.0'
+  s.dependency 'SPAlert', '5.1.8'
 
   # Don't install the dependencies when we run `pod install` in the old architecture.
   if ENV['RCT_NEW_ARCH_ENABLED'] == '1' then

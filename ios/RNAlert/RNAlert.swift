@@ -2,50 +2,64 @@ import SPAlert
 
 @objc(RNAlert)
 class RNAlert: NSObject {
-  @objc(show:)
-  func show(options: NSDictionary) -> Void {
-    let title = options["title"] as! String
-    let message = options["message"] as! String
-    let duration = options["duration"] as? Float ?? 2
-    var preset: SPAlertIconPreset
-    var haptic: SPAlertHaptic
-
-    switch options["preset"] as? String {
-    case "error":
-      preset = .error
-    case "spinner":
-      preset = .spinner
-    case "heart":
-      preset = .heart
-    default:
-      preset = .done
+    var alertViews: [AlertAppleMusic16View] = []
+    
+    @objc(show:)
+    func show(options: NSDictionary) -> Void {
+        let title = options["title"] as! String
+        let message = options["message"] as! String
+        let duration = options["duration"] as! Float
+        let hapticOption = options["haptic"] as! String
+        let iconOption = options["icon"] as! String
+        var icon: AlertIcon
+        var haptic: AlertHaptic
+        
+        switch iconOption {
+        case "error":
+            icon = .error
+        case "spinner":
+            icon = .spinnerLarge
+        case "heart":
+            icon = .heart
+        default:
+            icon = .done
+        }
+        
+        switch hapticOption {
+        case "error":
+            haptic = .error
+        case "warning":
+            haptic = .warning
+        case "success":
+            haptic = .success
+        default:
+            haptic = .none
+        }
+        
+        DispatchQueue.main.async {
+            guard let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
+            
+            let alertView = AlertAppleMusic16View(title: title, subtitle: message, icon: icon)
+            alertView.haptic = haptic
+            alertView.dismissByTap = false
+            if duration > 0 {
+                alertView.dismissInTime = true
+                alertView.duration = TimeInterval(duration)
+            } else {
+                alertView.dismissInTime = false
+            }
+            alertView.present(on: window)
+            self.alertViews.append(alertView)
+        }
     }
     
-    switch options["haptic"] as? String {
-    case "error":
-      haptic = .error
-    case "warning":
-      haptic = .warning
-    case "success":
-      haptic = .success
-    default:
-      haptic = .none
+    @objc(dismissAll)
+    func dismissAll() -> Void {
+        DispatchQueue.main.async {
+            self.alertViews.removeAll { view in
+                view.dismiss()
+                return true
+            }
+        }
     }
-    
-    let view = SPAlertView(
-      title: title,
-      message: message,
-      preset: preset
-    )
-    view.duration = TimeInterval(duration)
-    
-    DispatchQueue.main.async {
-      view.present(haptic: haptic)
-    }
-  }
-  
-  @objc(dismissAll)
-  func dismissAll() -> Void {
-    SPAlert.dismiss()
-  }
 }
